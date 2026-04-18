@@ -2,7 +2,6 @@ data/raw/
 models/*.pkl
 models/*.bin
 models/*.npy
-web/data/recommendations/
 __pycache__/
 *.pyc
 venv/
