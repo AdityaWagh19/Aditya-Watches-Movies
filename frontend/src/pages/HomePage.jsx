@@ -6,6 +6,7 @@ import { usePopularMovies } from '@/hooks/usePopularMovies'
 import { buildPosterUrl, buildBackdropUrl } from '@/lib/tmdb'
 import { useWatchlistStore } from '@/store/useWatchlistStore'
 import MovieGrid from '@/components/MovieGrid'
+import FindYourBinge from '@/components/FindYourBinge'
 import { cn } from '@/lib/utils'
 
 const ALL_GENRES = ['All', 'Action', 'Drama', 'Comedy', 'Thriller', 'Crime', 'Romance', 'Horror', 'Sci-Fi', 'Animation', 'Documentary', 'Fantasy']
@@ -247,6 +248,9 @@ export default function HomePage() {
 
       {/* ── Below-fold content ── */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-14 space-y-16">
+
+        {/* ── Find Your Next Binge ── */}
+        <FindYourBinge />
 
         {/* ── Trending Carousel ── */}
         <section>
