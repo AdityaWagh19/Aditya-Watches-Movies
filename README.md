@@ -603,29 +603,3 @@ pytest tests/ -v
 | "Find Your Next Binge" filter | <50ms | Synchronous client-side filter |
 
 ---
-
-## Design Decisions
-
-**Why precompute instead of serving a live recommendation API?**
-
-A live Python inference server would require hosting infrastructure (costs money), introduces latency, and has uptime concerns. Since the dataset is static and recommendations do not change until the model is retrained, precomputing and serving as static files delivers lower latency, zero infrastructure cost, and 100% uptime via GitHub Pages CDN.
-
-**Why TF-IDF and not a neural embedding model?**
-
-The constraint was a GTX 1650 with 16 GB RAM. A sentence-transformer or collaborative filtering model requiring dense embedding matrices for 22,318 movies at inference time would exceed memory limits. TF-IDF with `linear_kernel` on a precomputed sparse matrix is memory-efficient, fast to train, and produces interpretable results.
-
-**Why the 70/30 content-to-popularity split?**
-
-The recommendation is triggered by a user clicking a specific movie, indicating a strong content preference signal. A 70% content weight ensures the primary axis of similarity is thematic. The 30% popularity component prevents the system from surfacing well-matched but obscure films that a user is unlikely to recognize or trust.
-
-**Why `linear_kernel` instead of `cosine_similarity`?**
-
-`TfidfVectorizer` returns L2-normalized row vectors. The dot product of two L2-normalized vectors equals their cosine similarity. `linear_kernel` computes only the dot product, skipping the normalization step that `cosine_similarity` would redundantly apply. On a 22,318 × 10,000 matrix this saves approximately 50% of computation time per recommendation call.
-
-**Why are `tfidf_matrix.pkl` and `tfidf_model.pkl` not committed to git?**
-
-The sparse matrix is 6 MB as a binary file. At 22,318 × 10,000 it is dense enough that git history would grow significantly with each rebuild. Since the matrix is fully reproducible from `cleaned_movies.csv` in approximately 60 seconds, there is no value in tracking it.
-
-**Why `emptyOutDir: false` in Vite?**
-
-The standard Vite build behavior deletes the entire output directory before writing new assets. The `docs/data/` directory contains 22,318 JSON files totaling several hundred MB. Deleting and re-adding them on every frontend code change would be destructive and slow. Setting `emptyOutDir: false` allows the build to overwrite only `index.html` and `assets/` while leaving `docs/data/` intact.
