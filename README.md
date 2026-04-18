@@ -1,4 +1,4 @@
-# Binged — TMDB Movie Recommendation System
+# Binged — Movie Recommendation System
 
 A full-stack movie recommendation system built on the TMDB dataset. The backend is a Python offline pipeline that applies content-based filtering via TF-IDF cosine similarity and an IMDb-style Bayesian popularity score, blended into a hybrid ranking. All recommendations are precomputed at build time and exported as static JSON files. The frontend is a React single-page application deployed to GitHub Pages that consumes those static files with no server required at runtime.
 
