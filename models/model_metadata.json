@@ -1,0 +1,7 @@
+{
+  "n_movies": 22318,
+  "build_date": "2026-04-18T21:58:02.427020",
+  "vote_threshold": 100,
+  "tfidf_features": 10000,
+  "raw_source": "data/raw/TMDB_all_movies.csv"
+}
