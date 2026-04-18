@@ -119,7 +119,7 @@ export default function MovieDetailPage() {
                 <span className="text-2xs text-ink-muted">{movie.year}</span>
               </div>
 
-              <h1 className="font-display text-4xl xl:text-5xl font-bold text-ink-primary leading-tight mb-4 text-balance">
+              <h1 className="font-display text-4xl xl:text-5xl font-bold text-white leading-[1.05] mb-4 text-balance tracking-[-0.025em]">
                 {movie.title}
               </h1>
 
@@ -183,10 +183,10 @@ export default function MovieDetailPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
         >
-          <div className="mb-6 pb-4 border-b border-edge-subtle">
-            <p className="text-xs font-medium text-lime uppercase tracking-widest mb-1">You might also like</p>
-            <h2 className="font-display text-2xl font-bold text-ink-primary">Recommended</h2>
-            <p className="text-xs text-ink-muted mt-1">Hybrid content + popularity match</p>
+          <div className="mb-8 pb-5 border-b border-white/[0.05]">
+            <p className="section-label mb-1.5">Because you liked this</p>
+            <h2 className="text-xl font-semibold text-ink-primary tracking-[-0.02em]">You might also enjoy</h2>
+            <p className="text-[12px] text-ink-muted mt-1 font-normal">Ranked by hybrid content + popularity score</p>
           </div>
 
           {recsLoading ? (
